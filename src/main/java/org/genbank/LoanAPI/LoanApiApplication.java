@@ -9,8 +9,6 @@ public class LoanApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LoanApiApplication.class, args);
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
-		System.out.println(bCryptPasswordEncoder.encode("b@123"));
 	}
 	
 	
