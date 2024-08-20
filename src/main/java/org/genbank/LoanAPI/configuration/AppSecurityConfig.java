@@ -40,6 +40,7 @@ public class AppSecurityConfig {
 		httpSecurity.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(request -> request
 						.requestMatchers("/hello/**").permitAll()
+						.requestMatchers("/actuator/**").authenticated()
 						.anyRequest().authenticated())
 				//.formLogin(Customizer.withDefaults())
 				.httpBasic(Customizer.withDefaults())
