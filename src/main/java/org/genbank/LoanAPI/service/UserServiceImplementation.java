@@ -1,6 +1,9 @@
 package org.genbank.LoanAPI.service;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.genbank.LoanAPI.exception.AccountNotFoundException;
 import org.genbank.LoanAPI.exception.UserNotFoundException;
 import org.genbank.LoanAPI.model.Account;
@@ -9,14 +12,9 @@ import org.genbank.LoanAPI.model.User;
 import org.genbank.LoanAPI.repository.AccountRepository;
 import org.genbank.LoanAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImplementation implements UserService{
@@ -47,6 +45,7 @@ public class UserServiceImplementation implements UserService{
         return userRepository.save(user);
     }
 
+    
     @Override
     public User getUserById(Long id) {
 		 User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
