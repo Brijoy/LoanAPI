@@ -41,9 +41,9 @@ public class AccountController {
     }
 
     @PostMapping("/{id}/withdraw")
-    public Account withdraw(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
+    public ResponseEntity<Account> withdraw(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
         Double amount = request.get("accountBalance");
-        return accountService.withdraw(id, amount);
+        return new ResponseEntity<>(accountService.withdraw(id, amount),HttpStatus.CREATED);
     }
 
     @GetMapping
