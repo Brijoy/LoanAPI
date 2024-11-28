@@ -19,14 +19,14 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping
-    public Account createAccount(@RequestBody Account account) {
-        return accountService.createAccount(account);
+    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+        return new ResponseEntity<>(accountService.createAccount(account),HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
-    public List<Account> getAllAccount() {
+    public ResponseEntity<List<Account>> getAllAccount() {
         // List<Account> option = accountService.getAllAccount().orElseThrow(() -> new RuntimeException("Account's not found"));
-        return  accountService.getAllAccount();
+        return  ResponseEntity.ok(accountService.getAllAccount());
     }
 
     @GetMapping("/{id}")
