@@ -1,5 +1,7 @@
 package org.genbank.LoanAPI.exception;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.management.RuntimeErrorException;
@@ -18,14 +20,30 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Object> reponseEntity(UserNotFoundException rteee, WebRequest webRequest){
-        return new ResponseEntity<Object>("User Not found", HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorClass> reponseEntity(UserNotFoundException rteee, WebRequest webRequest){
+
+        ErrorClass errorObj = new ErrorClass(
+                rteee.getMessage(),
+                LocalDateTime.now(),
+                webRequest.getDescription(true),
+                "User Not found"
+        );
+
+        return new ResponseEntity<>(errorObj, HttpStatus.NOT_FOUND);
 
     }
 
     @ExceptionHandler(LoanApplicationNotFoundException.class)
-    public ResponseEntity<Object> reponseEntity(LoanApplicationNotFoundException rteee, WebRequest webRequest){
-        return new ResponseEntity<Object>("Loan Application Not found", HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorClass> reponseEntity(LoanApplicationNotFoundException rteee, WebRequest webRequest){
+        //return new ResponseEntity<Object>("Loan Application Not found", HttpStatus.NOT_FOUND);
+        ErrorClass errorObj = new ErrorClass(
+                rteee.getMessage(),
+                LocalDateTime.now(),
+                webRequest.getDescription(true),
+                "Loan Application Not found"
+        );
+
+        return new ResponseEntity<>(errorObj, HttpStatus.NOT_FOUND);
 
     }
 
@@ -37,7 +55,7 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> reponseEntity(RuntimeErrorException rteee, WebRequest webRequest){
-        ErrorClass errorClass = new ErrorClass(rteee.getMessage(),new Date(),webRequest.getDescription(false));
+        ErrorClass errorClass = new ErrorClass(rteee.getMessage(),LocalDateTime.now(),webRequest.getDescription(false),"INTERNAL SERVER ERROR");
         return new ResponseEntity<Object>(errorClass, HttpStatus.INTERNAL_SERVER_ERROR);
 
     }

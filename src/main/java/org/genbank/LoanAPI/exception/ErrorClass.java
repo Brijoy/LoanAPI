@@ -1,20 +1,23 @@
 package org.genbank.LoanAPI.exception;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ErrorClass {
 
     String errMsg;
-    Date timestamp;
+    LocalDateTime timestamp;
     String details;
+    String errorCode;
 
 
 
-    public ErrorClass(String errMsg, Date timestamp, String details) {
+    public ErrorClass(String errMsg, LocalDateTime timestamp, String details,String errorCode) {
         super();
         this.errMsg = errMsg;
         this.timestamp = timestamp;
         this.details = details;
+        this.errorCode = errorCode;
     }
 
 
@@ -31,13 +34,13 @@ public class ErrorClass {
 
 
 
-    public Date getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
 
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -54,14 +57,22 @@ public class ErrorClass {
     }
 
 
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
 
     @Override
     public String toString() {
-        return "Error [errMsg=" + errMsg + ", timestamp=" + timestamp + ", details=" + details + "]";
+        return "ErrorClass{" +
+                "errMsg='" + errMsg + '\'' +
+                ", timestamp=" + timestamp +
+                ", details='" + details + '\'' +
+                ", errorCode='" + errorCode + '\'' +
+                '}';
     }
-
-
-
-
 }
 
