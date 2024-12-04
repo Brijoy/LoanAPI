@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -66,8 +67,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> getAllAccount() {
-        return (List<Account>) accountRepository.findAll();
+    public List<AccountDto> getAllAccount() {
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream().map(AccountMapper::mapToAccountDto).collect(Collectors.toList());
     }
 
     @Override

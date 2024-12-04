@@ -14,6 +14,6 @@ public interface AccountService {
     public Account withdraw(Integer id, double amount);*/
     public AccountDto deposit(Integer id, double amount);
     public AccountDto withdraw(Integer id, double amount);
-    public List<Account> getAllAccount();
+    public List<AccountDto> getAllAccount();
     public List<Account> getAllAccountPaging(Integer pageNo,Integer pageSize);
 }

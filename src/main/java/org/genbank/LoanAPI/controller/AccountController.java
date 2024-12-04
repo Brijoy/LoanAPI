@@ -25,7 +25,7 @@ public class AccountController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Account>> getAllAccount() {
+    public ResponseEntity<List<AccountDto>> getAllAccount() {
         // List<Account> option = accountService.getAllAccount().orElseThrow(() -> new RuntimeException("Account's not found"));
         return  ResponseEntity.ok(accountService.getAllAccount());
     }
@@ -36,17 +36,17 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getAccount(accountId));
     }
 
-    @PostMapping("/{id}/deposit")
+    @PutMapping("/{id}/deposit")
     public ResponseEntity<AccountDto> deposit(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
         Double amount = request.get("accountBalance");
-        return new ResponseEntity<>(accountService.deposit(id, amount),HttpStatus.CREATED);
+        return ResponseEntity.ok(accountService.deposit(id, amount));
     }
 
-    @PostMapping("/{id}/withdraw")
+    @PutMapping("/{id}/withdraw")
     public ResponseEntity<AccountDto> withdraw(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
         Double amount = request.get("accountBalance");
-        return new ResponseEntity<>(accountService.withdraw(id, amount),HttpStatus.CREATED
-        );
+       // return new ResponseEntity<>(accountService.withdraw(id, amount),HttpStatus.CREATED
+        return ResponseEntity.ok(accountService.withdraw(id, amount));
     }
 
     @GetMapping
