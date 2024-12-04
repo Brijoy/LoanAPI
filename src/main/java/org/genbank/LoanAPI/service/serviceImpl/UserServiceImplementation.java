@@ -1,4 +1,4 @@
-package org.genbank.LoanAPI.service;
+package org.genbank.LoanAPI.service.serviceImpl;
 
 
 import java.util.ArrayList;
@@ -11,13 +11,14 @@ import org.genbank.LoanAPI.model.Name;
 import org.genbank.LoanAPI.model.User;
 import org.genbank.LoanAPI.repository.AccountRepository;
 import org.genbank.LoanAPI.repository.UserRepository;
+import org.genbank.LoanAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class UserServiceImplementation implements UserService{
+public class UserServiceImplementation implements UserService {
 
     @Autowired
     private UserRepository userRepository;

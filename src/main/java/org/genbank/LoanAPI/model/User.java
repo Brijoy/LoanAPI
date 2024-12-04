@@ -5,7 +5,11 @@ import jakarta.persistence.*;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "users_master")
 public class User {
@@ -31,31 +35,6 @@ public class User {
         this.name = name;
         this.account = account;
     }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public void setName() {
-        this.name = name;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
 
 	@Override
 	public String toString() {

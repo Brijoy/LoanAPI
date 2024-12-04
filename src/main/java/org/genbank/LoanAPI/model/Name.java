@@ -2,9 +2,18 @@ package org.genbank.LoanAPI.model;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+@Getter
+@Setter
+@NoArgsConstructor
+//@AllArgsConstructor
 
 @Embeddable
 public class Name implements Serializable {
@@ -24,33 +33,7 @@ public class Name implements Serializable {
         this.lastName = lastName;
     }
 
-    public Name() {}
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
+   @Override
     public String toString() {
         return "Name [firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + "]";
     }

@@ -1,7 +1,11 @@
-package org.genbank.LoanAPI.service;
+package org.genbank.LoanAPI.service.serviceImpl;
 
+import lombok.AllArgsConstructor;
+import org.genbank.LoanAPI.dto.AccountDto;
+import org.genbank.LoanAPI.mapper.AccountMapper;
 import org.genbank.LoanAPI.model.Account;
 import org.genbank.LoanAPI.repository.AccountRepository;
+import org.genbank.LoanAPI.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,14 +17,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
     AccountRepository accountRepository;
 
     @Override
-    public Account createAccount(Account account) {
-        return accountRepository.save(account);
+    public AccountDto createAccount(AccountDto accountDto)
+    {
+        Account account = AccountMapper.mapToAccount(accountDto);
+       Account saveAccount = accountRepository.save(account);
+        return AccountMapper.mapToAccountDto(saveAccount);
     }
 
     @Override

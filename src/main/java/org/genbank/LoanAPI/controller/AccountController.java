@@ -1,5 +1,6 @@
 package org.genbank.LoanAPI.controller;
 
+import org.genbank.LoanAPI.dto.AccountDto;
 import org.genbank.LoanAPI.model.Account;
 import org.genbank.LoanAPI.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        return new ResponseEntity<>(accountService.createAccount(account),HttpStatus.CREATED);
+    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
+        return new ResponseEntity<>(accountService.createAccount(accountDto),HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
