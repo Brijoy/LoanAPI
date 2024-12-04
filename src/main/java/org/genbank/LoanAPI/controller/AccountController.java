@@ -31,18 +31,19 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public Account getAccount(@PathVariable Integer id) {
-        return accountService.getAccount(id).orElseThrow(() -> new RuntimeException("Account not found"));
+    public ResponseEntity<AccountDto> getAccount(@PathVariable("id") Integer accountId) {
+        //return accountService.getAccount(id).orElseThrow(() -> new RuntimeException("Account not found"));
+        return ResponseEntity.ok(accountService.getAccount(accountId));
     }
 
     @PostMapping("/{id}/deposit")
-    public Account deposit(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
+    public ResponseEntity<AccountDto> deposit(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
         Double amount = request.get("accountBalance");
-        return accountService.deposit(id, amount);
+        return new ResponseEntity<>(accountService.deposit(id, amount),HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}/withdraw")
-    public ResponseEntity<Account> withdraw(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
+    public ResponseEntity<AccountDto> withdraw(@PathVariable Integer id, @RequestBody Map<String, Double> request) {
         Double amount = request.get("accountBalance");
         return new ResponseEntity<>(accountService.withdraw(id, amount),HttpStatus.CREATED
         );
