@@ -35,7 +35,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto getAccount(Integer accountId) {
         Account account = accountRepository.findById(accountId).orElseThrow(
-                () -> new ResourceNotFoundException("Account is not exists with given number : " + accountId)
+                () -> new ResourceNotFoundException("Account does not exists with given number : " + accountId)
         );
         return AccountMapper.mapToAccountDto(account);
 
@@ -44,21 +44,25 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto deposit(Integer id, double amount) {
         //Account account = getAccount(id).orElseThrow(() -> new RuntimeException("Account not found"));
-        AccountDto accountDto = getAccount(id);
-        accountDto.setAccountBalance(accountDto.getAccountBalance() + amount);
-        Account saveaccount = accountRepository.save(AccountMapper.mapToAccount(accountDto));
+        Account account = accountRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Account does not exists with given number : " + id)
+        );
+        account.setAccountBalance(account.getAccountBalance() + amount);
+        Account saveaccount = accountRepository.save(account);
         return AccountMapper.mapToAccountDto(saveaccount);
     }
 
     @Override
     public AccountDto withdraw(Integer id, double amount) {
         //Account account = getAccount(id).orElseThrow(() -> new RuntimeException("Account not found"));
-        AccountDto accountDto = getAccount(id);
-        if (accountDto.getAccountBalance() < amount) {
+        Account account = accountRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Account does not exists with given number : " + id)
+        );
+        if (account.getAccountBalance() < amount) {
             throw new RuntimeException("Insufficient funds");
         }
-        accountDto.setAccountBalance(accountDto.getAccountBalance() - amount);
-        return AccountMapper.mapToAccountDto(accountRepository.save(AccountMapper.mapToAccount(accountDto)));
+        account.setAccountBalance(account.getAccountBalance() - amount);
+        return AccountMapper.mapToAccountDto(accountRepository.save(account));
     }
 
     @Override
