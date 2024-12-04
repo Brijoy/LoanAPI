@@ -10,6 +10,8 @@ public interface AccountService {
     public AccountDto createAccount(AccountDto account);
     //public Optional<Account> getAcc(Integer id);
     public AccountDto getAccount(Integer accountId);
+    /*public Account deposit(Integer id, double amount);
+    public Account withdraw(Integer id, double amount);*/
     public AccountDto deposit(Integer id, double amount);
     public AccountDto withdraw(Integer id, double amount);
     public List<Account> getAllAccount();
